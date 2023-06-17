@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios"
 
 function StaffingSystem() {
   const [fullName, setFullName] = useState('');
   const [resume, setResume] = useState('');
   const [technology, setTechnology] = useState([]);
-
+  const [allfield, setallfield] = useState([])
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
   };
@@ -16,7 +17,17 @@ function StaffingSystem() {
   const handleTechnologyChange = (event) => {
    setTechnology(event.target.value)
   };
-
+  useEffect(() => {
+    const fetchdata = async () => {
+      try{
+        const res = await axios.get("http://localhost:5000/staff");
+        setallfield(res.data);
+      }catch(err){
+        console.log(err);
+      }
+    }
+    fetchdata()
+  }, [])
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -24,11 +35,19 @@ function StaffingSystem() {
     console.log('Full Name:', fullName);
     console.log('Resume:', resume);
     console.log('Resume:', technology);
-
+    const submittodatabase = async() => {
+      try{
+        const res = await axios.post("http://localhost:5000/staff", {fullName, resume, technology});
+        setallfield([...allfield, res.data])
+      }catch(err){
+        console.log(err);
+      }
+      setFullName('');
+      setResume('');
+      setTechnology();
+    }
+    submittodatabase()
     // Reset form
-    setFullName('');
-    setResume('');
-    setTechnology();
   };
 
   return (
@@ -70,6 +89,16 @@ function StaffingSystem() {
         <br />
         <input type="submit" value="Submit" />
       </form>
+      {
+      allfield.map((obj) => {
+        return(
+        <li>
+          <h1>Name : {obj.fullName}</h1>
+          <h2>technology : {obj.technology}</h2>
+        </li>
+        )
+      })
+    }
     </div>
   );
 }
