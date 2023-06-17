@@ -1,0 +1,4 @@
+Implement a dummy staffing system containing the resource details. The application should meet the below requirements-
+ 1. Create a form to enter the resource details which will contain the following fields-full name, upload resume, technology, and submit button. 
+ 2. The full name will be a text input field, the upload resume will be having the file upload functionality and technology will be a checkbox field where the user can select multiple options.
+ 3. Create a database for the above form and feed the corresponding data into the database. Fetch all data from the resource table and display that on the screen on a separate dashboard page. There are no restrictions on how the page should be laid out and styled. Be as creative as you wish, with a focus on user experience. Feel free to include CSS frameworks or other libraries that are helpful to you. Upload the solution on Dropbox or Google Drive and share the link in the answer.
