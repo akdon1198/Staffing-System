@@ -74,4 +74,4 @@ function StaffingSystem() {
   );
 }
 
-module.exports = StaffingSystem
+export default StaffingSystem

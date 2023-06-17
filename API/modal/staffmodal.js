@@ -4,3 +4,5 @@ const staffSchema = new mongoose.Schema({
     resume : {required : true, type : File},
     technology : {required : true, type : String}
 })
+
+module.exports = staffSchema.model("staff", staffSchema)
